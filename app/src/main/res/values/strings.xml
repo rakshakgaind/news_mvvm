@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">News</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="api_key">90bc822ab0204e989237c40d308f88db</string>
+    <string name="api_key2">f9983d32ae06454d996437732e54637e</string>
+    <string name="api_key3">204ccd482db74ae3a85d9eff8eb2bcf1</string>
+    <string name="breaking_news">Breaking News</string>
+    <string name="search_news">Search News</string>
+    <string name="save_news">Save News</string>
+    <string name="search_here">Search here</string>
+    <string name="saved_success_message">News Saved Successfully</string>
+    <string name="connection_lost">Connection Lost</string>
+    <string name="title">TITLE</string>
+    <string name="source">SOURCE</string>
+    <string name="published_at">PUBLISHED AT</string>
+    <string name="save_to_database">SAVE TO DATABASE</string>
+    <string name="saved_news">Saved News</string>
+    <string name="article">Article</string>
+    <string name="update_message">News Updated Successfully</string>
+    <string name="description">DESCRIPTION</string>
+</resources>
