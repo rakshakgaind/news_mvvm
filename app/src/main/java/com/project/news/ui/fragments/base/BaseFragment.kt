@@ -10,8 +10,8 @@ import com.project.news.db.ArticleDatabase
 import com.project.news.ui.activity.MainActivity
 import com.project.news.vm.NewsViewModel
 
-/*
-*  Re-initialization already from already initialized members from activity, to access them in child fragments .
+/**
+*  Re-initialization of objects from already initialized members from activity, to access them in child fragments .
 */
 
 open class BaseFragment(contentLayoutId: Int) : Fragment(contentLayoutId) {

@@ -9,7 +9,6 @@ plugins {
 android {
     namespace 'com.project.news'
     compileSdk 33
-    buildToolsVersion '33.0.0'
 
     defaultConfig {
         applicationId "com.project.news"
@@ -32,7 +31,7 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11
+        jvmTarget = '11'
     }
     buildFeatures {
         viewBinding true
@@ -82,4 +81,9 @@ dependencies {
 
     //lottie anim
     implementation "com.airbnb.android:lottie:$lottie_version"
+
+    //shimmer effect
+    implementation "com.facebook.shimmer:shimmer:0.5.0"
+
+
 }

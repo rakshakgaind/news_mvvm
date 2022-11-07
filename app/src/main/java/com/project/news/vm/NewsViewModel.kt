@@ -56,13 +56,22 @@ class NewsViewModel(app: Application, private val newsRepository: NewsRepository
     private var isConnected = false
 
     init {
-        val networkRequest = NetworkRequest.Builder().addCapability(NET_CAPABILITY_INTERNET).addTransportType(TRANSPORT_WIFI).addTransportType(TRANSPORT_CELLULAR).build()
+        val networkRequest = NetworkRequest.Builder()
+            .addCapability(NET_CAPABILITY_INTERNET)
+            .addTransportType(TRANSPORT_WIFI)
+            .addTransportType(TRANSPORT_CELLULAR)
+            .build()
 
         initializeNetworkCallback()
         val connectivityManager = app.getSystemService(ConnectivityManager::class.java) as ConnectivityManager
         connectivityManager.requestNetwork(networkRequest, networkCallback)
     }
 
+    /**
+     * loadsBreakingNews(countryCode) function takes country as argument and fetches top breaking from specified country.
+     * args:- countryCode.
+     * postResult:- postValue to breakingNews Live Data for data changes.
+     * */
     fun loadBreakingNews(countryCode: String) = viewModelScope.launch {
         breakingNews.postValue(Resource.Loading())
         try {
@@ -81,6 +90,11 @@ class NewsViewModel(app: Application, private val newsRepository: NewsRepository
 
     }
 
+    /**
+     * It handles response coming from api and based on Success or Errors it returns 'Response'.
+     * args:- Response<NewsResponse>
+     * returns:-Resource.<T>(data,message)
+     * */
     private fun handleBreakingNewsResponse(response: Response<NewsResponse>): Resource<NewsResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
@@ -96,6 +110,11 @@ class NewsViewModel(app: Application, private val newsRepository: NewsRepository
         return Resource.Error(response.message())
     }
 
+    /**
+     * It takes searchQuery as parameter and based on results it posts value to searchNews.
+     * args:- searchQuery
+     * return:Job
+     * */
     fun loadSearchResults(searchQuery: String) = viewModelScope.launch {
         searchNews.postValue(Resource.Loading())
         try {
@@ -114,6 +133,11 @@ class NewsViewModel(app: Application, private val newsRepository: NewsRepository
 
     }
 
+    /**
+     * It handles search response based on success or failure it returns value wrapped in Resource<NewsResponse>.
+     * args: Response<NewsResponse>
+     * returns:- Resource<NewsResponse>
+     * */
     private fun handleSearchNewsResponse(response: Response<NewsResponse>): Resource<NewsResponse> {
 
         if (response.isSuccessful) {
@@ -130,16 +154,37 @@ class NewsViewModel(app: Application, private val newsRepository: NewsRepository
         return Resource.Error(response.message())
     }
 
+    /**
+     * It saves 'Article' into database and returns primary key of inserted/updated row, if the record already exists it updates the row.
+     * args:- Article
+     * returns:- Long
+     * */
     fun saveNews(article: Article) = viewModelScope.launch {
         newsRepository.saveNews(article)
     }
 
+    /**
+     * getSavedNews() returns the result of sql query as list of 'Articles' which is wrapped in LiveData to observe it.
+     * args:- N/A.
+     * returns:- LiveData<List<Article>>.
+     * */
     fun getSavedNews() = newsRepository.getSavedNews()
 
+    /**
+     * deleteNews(article) delete 'Article' from database if exists.
+     * args:- Article
+     * returns:- N/A
+     * */
     fun deleteNews(article: Article) = viewModelScope.launch {
         newsRepository.deleteNews(article)
     }
 
+    /**
+     * It initialize networkCallback.
+     * args: N/A
+     * returns:N/A
+     * NetworkCallback overrides onAvailable and onLost which is called everytime on connection establish and lost.
+     * */
     private fun initializeNetworkCallback() {
         networkCallback = object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {

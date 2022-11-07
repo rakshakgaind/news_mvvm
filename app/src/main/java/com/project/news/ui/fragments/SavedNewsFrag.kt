@@ -8,18 +8,25 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.project.news.R
 import com.project.news.adapters.NewsAdapter
 import com.project.news.databinding.FragmentSavedNewsBinding
+import com.project.news.models.Article
+import com.project.news.ui.activity.MainActivity
 import com.project.news.ui.fragments.base.BaseFragment
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-/*
-* Fetches and List all article from room database <article_db.db> to recyclerview.
-* ItemTouchHelperCallback is used to provide swipe gesture for deletion from database.
-* On swipe, it shows delete icon, for that third party library is used https://github.com/xabaras/RecyclerViewSwipeDecorator .
-* */
+/**
+ * Fetches and List all article from room database <article_db.db> to recyclerview.
+ * ItemTouchHelperCallback is used to provide swipe gesture for deletion from database.
+ * On swipe, it shows delete icon, for that third party library is used https://github.com/xabaras/RecyclerViewSwipeDecorator .
+ * */
 
 class SavedNewsFrag : BaseFragment(R.layout.fragment_saved_news) {
     private lateinit var binding: FragmentSavedNewsBinding
@@ -36,9 +43,11 @@ class SavedNewsFrag : BaseFragment(R.layout.fragment_saved_news) {
         newsViewModel.getSavedNews().observe(viewLifecycleOwner) {
             if (it?.isNotEmpty() == true) {
                 adapter.asyncList.submitList(it)
+                binding.lottieAnimation.pauseAnimation()
                 binding.lottieAnimation.visibility = View.GONE
                 binding.rv.visibility = View.VISIBLE
             } else {
+                binding.lottieAnimation.playAnimation()
                 binding.lottieAnimation.visibility = View.VISIBLE
                 binding.rv.visibility = View.GONE
             }
@@ -67,11 +76,7 @@ class SavedNewsFrag : BaseFragment(R.layout.fragment_saved_news) {
             val position = viewHolder.bindingAdapterPosition
             val article = adapter.asyncList.currentList[position]
             newsViewModel.deleteNews(article)
-
-            Snackbar.make(binding.root, "Successfully deleted item", Snackbar.LENGTH_LONG).setAction("UNDO") {
-                newsViewModel.saveNews(article)
-
-            }.show()
+            showMessage(article)
         }
 
         override fun onChildDraw(
@@ -90,5 +95,21 @@ class SavedNewsFrag : BaseFragment(R.layout.fragment_saved_news) {
         }
 
     }
+
+    private fun showMessage(article: Article) {
+        val btmNav = (requireActivity() as MainActivity).findViewById<BottomNavigationView>(R.id.btm_nav)
+        btmNav.visibility = View.GONE
+        val snackBar = Snackbar.make(binding.root, "Successfully deleted item", Snackbar.LENGTH_SHORT).setAction("UNDO") {
+            newsViewModel.saveNews(article)
+        }
+        CoroutineScope(Dispatchers.Main).launch {
+            snackBar.show()
+            delay(2000)
+            btmNav.visibility = View.VISIBLE
+        }
+
+
+    }
+
 
 }

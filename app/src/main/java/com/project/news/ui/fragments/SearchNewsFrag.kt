@@ -21,7 +21,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-/*
+/**
 * Fetches and List all articles related to search query and list them in recycler view.
 * Search query results may contain multiple pages, for that pagination implemented.
 * By default search query searches in all parameters of Article (which includes source, desc, tittle etc).

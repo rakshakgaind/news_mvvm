@@ -4,11 +4,11 @@ import com.project.news.api.RetrofitInstance
 import com.project.news.db.ArticleDatabase
 import com.project.news.models.Article
 
-/*
-* Repository pattern implemented in MVVM .
-* For ViewModel it provides data ,i.e ViewModel unaware from where we are getting data either from remote or local. (Abstraction)
-* It handles all operation either to database or api to get response
-* */
+/**
+ * Repository pattern implemented in MVVM .
+ * For ViewModel it provides data ,i.e ViewModel unaware from where we are getting data either from remote or local. (Abstraction)
+ * It handles all operation either to database or api to get response
+ * */
 
 class NewsRepository(private val db: ArticleDatabase) {
 

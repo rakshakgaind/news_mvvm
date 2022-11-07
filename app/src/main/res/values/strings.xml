@@ -16,7 +16,7 @@
     <string name="search_news">Search News</string>
     <string name="save_news">Save News</string>
     <string name="search_here">Search here</string>
-    <string name="saved_success_message">News Saved Successfully</string>
+    <string name="saved_success_message">Article Saved Successfully</string>
     <string name="connection_lost">Connection Lost</string>
     <string name="title">TITLE</string>
     <string name="source">SOURCE</string>
@@ -26,4 +26,5 @@
     <string name="article">Article</string>
     <string name="update_message">News Updated Successfully</string>
     <string name="description">DESCRIPTION</string>
+    <string name="save_article">Save Article</string>
 </resources>

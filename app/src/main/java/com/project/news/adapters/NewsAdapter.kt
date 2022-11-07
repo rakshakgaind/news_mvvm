@@ -16,7 +16,7 @@ import com.bumptech.glide.request.target.Target
 import com.project.news.databinding.ItemArticleBinding
 import com.project.news.models.Article
 
-/*
+/**
 * Common recycler view implemented with diffUtil , to list breaking news, saved news, search news.
 */
 
@@ -31,6 +31,10 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
             }
         }
     }
+
+    /**
+     * DiffUtil callback compares each item, and then notify only selected items
+     * */
 
     private val diffUtil = object : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
@@ -82,6 +86,9 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
     }
 
+    /**
+     * Recyclerview item click callback
+     * */
     var onItemClickListener: ((Article) -> Unit)? = null
 
     override fun getItemCount(): Int = asyncList.currentList.size

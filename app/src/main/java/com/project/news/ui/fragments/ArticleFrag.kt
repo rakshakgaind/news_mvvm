@@ -3,6 +3,7 @@ package com.project.news.ui.fragments
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebViewClient
+import androidx.core.widget.NestedScrollView
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -11,10 +12,10 @@ import com.project.news.databinding.FragmentArticleBinding
 import com.project.news.ui.activity.MainActivity
 import com.project.news.ui.fragments.base.BaseFragment
 
-/*
+/**
  * Loads article on webView from news url<field in Article> .
  * on saving article it will insert data in room database <article_db.db> .
-*/
+ */
 class ArticleFrag : BaseFragment(R.layout.fragment_article) {
     private lateinit var binding: FragmentArticleBinding
     private val args: ArticleFragArgs by navArgs()
@@ -38,6 +39,20 @@ class ArticleFrag : BaseFragment(R.layout.fragment_article) {
             newsViewModel.saveNews(article)
             Snackbar.make(binding.fab, getString(R.string.saved_success_message), Snackbar.LENGTH_SHORT).show()
         }
+
+        binding.nsvRoot.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            val fab = binding.fab
+            if (scrollY > oldScrollY + 12 && fab.isExtended) {
+                fab.shrink()
+            }
+
+            if (scrollY < oldScrollY - 12 && !fab.isExtended) {
+                fab.extend()
+            }
+            if (scrollY == 0)
+                fab.extend()
+        })
+
     }
 
 

@@ -8,11 +8,12 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.project.news.models.Article
 
-/*
-* Database Access operation (DAO) defined here, with Room Library
-* */
+/**
+ * Database Access operation (DAO) defined here, with Room Library.
+ * */
 @Dao
 interface ArticleDao {
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(article: Article): Long

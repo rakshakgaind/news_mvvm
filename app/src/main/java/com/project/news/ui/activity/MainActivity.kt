@@ -14,12 +14,12 @@ import com.project.news.repository.NewsRepository
 import com.project.news.vm.NewsViewModel
 import com.project.news.vm.NewsVmProviderFactory
 
-/*
-* News Application based on MVVM architecture,& which uses jetpack components to ease development process .
-* Api used from https://newsapi.org/ .
-* Components used : Navigation Component, Room Database Library, LiveData, Retrofit, ViewModels etc.
-* Permission used: ACCESS_NETWORK_STATE, android.permission.INTERNET, android.permission.CHANGE_NETWORK_STATE
-*/
+/**
+ * News Application based on MVVM architecture,& which uses jetpack components to ease development process .
+ * Api used from https://newsapi.org/ .
+ * Components used : Navigation Component, Room Database Library, LiveData, Retrofit, ViewModels etc.
+ * Permission used: ACCESS_NETWORK_STATE, android.permission.INTERNET, android.permission.CHANGE_NETWORK_STATE
+ */
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /* UI handling on connection establish and lost */
+    /** UI handling on connection establish and lost */
     private fun networkAvailabilitySetup() {
         newsViewModel.getConnectivity().observe(this) {
             if (it) {

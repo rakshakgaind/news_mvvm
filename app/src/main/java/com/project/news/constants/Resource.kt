@@ -1,6 +1,6 @@
 package com.project.news.constants
 
-/*
+/**
 * Sealed (enum) class to differentiate between type of response we are getting and wrap response according to them.
 * */
 sealed class Resource<T>(

@@ -6,7 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-/*
+/**
 * It is implemented with singleton pattern for whole application.
 * For logging purpose, HttpLoggingInterceptor is used as client https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor .
 * */

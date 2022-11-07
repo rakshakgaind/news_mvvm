@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 import com.project.news.models.Article
 
 
-/*
+/**
 * Database class is implemented with Room library.
 * Singleton pattern implemented for database object for whole application.
 */

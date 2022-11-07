@@ -20,15 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_article" />
 
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/progress_circular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:indeterminate="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include android:id="@+id/shimmer_container"
+        layout="@layout/item_shimmer_multiple" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
